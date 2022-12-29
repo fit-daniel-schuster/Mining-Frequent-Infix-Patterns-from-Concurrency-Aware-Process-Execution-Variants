@@ -20,4 +20,4 @@ Corresponding author: Daniel Schuster ([Mail](mailto:daniel.schuster@fit.fraunho
 ### Further Results
 
 This repository contains additional Figure and the orginal Eval-Runs. 
-The results/plots are located in `Plotting/Figure` and the Eval-RUns in 'Plotting/Eval-Runs.
+The results/plots are located in `Plotting/Figure` and the Eval-Runs in 'Plotting/Eval-Runs'.
