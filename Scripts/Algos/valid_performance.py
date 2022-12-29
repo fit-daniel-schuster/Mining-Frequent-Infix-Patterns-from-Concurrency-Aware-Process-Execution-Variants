@@ -85,7 +85,7 @@ def min_sub_mining_memory(
     k_it,
     min_sup,
     loop=False,
-    bfs_traversal=False,
+    bfs_traversal=True,
 ):
     """_summary_
 

@@ -36,11 +36,9 @@ def exit_after(s):
 
 def run_mining_eval(fnc, timeout, prms, repeats):
     
-    
     @exit_after(timeout)
     def run_algo(fnc, prms): 
         return fnc(**prms)  
-    
     
     rTimes = []
     
@@ -82,11 +80,9 @@ def run_mining_eval(fnc, timeout, prms, repeats):
 
 def run_mining_memory_eval(fnc, timeout, prms):
     
-    
     @exit_after(timeout)
     def run_algo(fnc, prms): 
         return fnc(**prms)  
-    
     
     rTimes = []
     

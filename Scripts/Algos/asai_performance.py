@@ -1,5 +1,6 @@
 from collections import Counter
 from typing import Mapping, Set
+from cortado_core.experiments.subpattern_eval.Algos.valid_performance import min_sub_mining_memory
 from cortado_core.subprocess_discovery.concurrency_trees.cTrees import (
     ConcurrencyTree,
     cTreeOperator,
@@ -18,7 +19,8 @@ from cortado_core.subprocess_discovery.subtree_mining.tree_pattern import (
     extend_motif_on_operator_node,
 )
 
-from cortado_core.subprocess_discovery.subtree_mining.treebank import TreeBankEntry
+from cortado_core.subprocess_discovery.subtree_mining.treebank import TreeBankEntry, create_treebank_from_cv_variants
+from cortado_core.utils.cvariants import get_concurrency_variants
 
 def count_activites_in_tree(tree: ConcurrencyTree):
 
@@ -131,7 +133,6 @@ def min_sub_mining_asai(
         aActivities,
         dfActivites,
         ccActivites,
-        no_pruning,
     )
 
     # Store the results
@@ -206,7 +207,6 @@ def min_sub_mining_asai_memory(
         aActivities,
         dfActivites,
         ccActivites,
-        no_pruning,
     )
 
     # Store the results
@@ -288,7 +288,6 @@ def generate_initial_candidates_asai(
     aActivities,
     dfActivites,
     ccActivites,
-    no_pruning=False,
 ) -> Set[TreePattern]:
     def create_operator_leaf_2_pattern(activity, operator):
 
@@ -338,36 +337,22 @@ def generate_initial_candidates_asai(
 
     C2[(cTreeOperator.Sequential, cTreeOperator.Fallthrough)] = tp
 
-    if no_pruning:
+    # Create the frequent "S" -> Activity pattern
+    for activity in dfActivites:
+        C2[(cTreeOperator.Sequential, activity)] = create_operator_leaf_2_pattern(
+            activity, cTreeOperator.Sequential
+        )
 
-        for activity in aActivities:
-            C2[(cTreeOperator.Sequential, activity)] = create_operator_leaf_2_pattern(
-                activity, cTreeOperator.Sequential
-            )
-            C2[(cTreeOperator.Concurrent, activity)] = create_operator_leaf_2_pattern(
-                activity, cTreeOperator.Concurrent
-            )
-            C2[(cTreeOperator.Fallthrough, activity)] = create_operator_leaf_2_pattern(
-                activity, cTreeOperator.Fallthrough
-            )
+    # Create all frequent "P" -> Activity patterns
+    for activity in ccActivites:
+        C2[(cTreeOperator.Concurrent, activity)] = create_operator_leaf_2_pattern(
+            activity, cTreeOperator.Concurrent
+        )
 
-    else:
-        # Create the frequent "S" -> Activity pattern
-        for activity in dfActivites:
-            C2[(cTreeOperator.Sequential, activity)] = create_operator_leaf_2_pattern(
-                activity, cTreeOperator.Sequential
-            )
-
-        # Create all frequent "P" -> Activity patterns
-        for activity in ccActivites:
-            C2[(cTreeOperator.Concurrent, activity)] = create_operator_leaf_2_pattern(
-                activity, cTreeOperator.Concurrent
-            )
-
-        for activity in aActivities:
-            C2[(cTreeOperator.Fallthrough, activity)] = create_operator_leaf_2_pattern(
-                activity, cTreeOperator.Fallthrough
-            )
+    for activity in aActivities:
+        C2[(cTreeOperator.Fallthrough, activity)] = create_operator_leaf_2_pattern(
+            activity, cTreeOperator.Fallthrough
+        )
 
     def create_rmo_list_entries(
         tid: int, tree: ConcurrencyTree, C2: Mapping[any, TreePattern]
@@ -516,3 +501,50 @@ def extend_node_asai(
                 )
 
     return extended_motifes
+
+
+if __name__ == "__main__":
+    
+    files = ['Sepsis Cases', 'BPI_CH_2020_PrepaidTravelCost', "BPI_Challenge_2012", 'BPI Challenge 2017']
+
+    from cortado_core.experiments.subpattern_eval.print_results import print_mining_results
+    
+    from cortado_core.subprocess_discovery.subtree_mining.obj import FrequencyCountingStrategy
+    from cortado_core.subprocess_discovery.subtree_mining.treebank import (
+        create_treebank_from_cv_variants,
+    )
+    from cortado_core.utils.cvariants import get_concurrency_variants
+    from pm4py.objects.log.importer.xes.importer import apply as xes_import
+        
+    log_path = "cortado_core\\experiments\\Event_Logs\\"
+    log = log_path + files[0] + ".xes"
+    
+    log = xes_import(log)
+    variants = get_concurrency_variants(log, False)
+    treeBank = create_treebank_from_cv_variants(variants, False)
+
+    timeout = 300  # 300 Second Timeout
+    
+    min_sup = 210
+    
+    print(min_sup)
+    
+    k_patterns_asai, _ = min_sub_mining_asai_memory(
+        treeBank,
+        FrequencyCountingStrategy.TraceTransaction,
+        100,
+        min_sup,
+        no_pruning=False,
+    )
+    
+    k_patterns_valid, _ = min_sub_mining_memory(
+        treeBank,
+        FrequencyCountingStrategy.TraceTransaction,
+        100,
+        min_sup, 
+        dfs_traversal = True
+    )
+
+    del k_patterns_asai[2]
+
+    print_mining_results(k_patterns_valid, k_patterns_asai)
