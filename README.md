@@ -24,7 +24,7 @@ To run the setup you need to have [Python Version >=3.8.0](https://www.python.or
   Setup a [Jupyter](https://jupyter.org/install) or [Jupyter Lab](https://jupyter.org/install) environment and start it. Open the notebook `Plotting/Plotting.ipynb` and run the first cell to install the packages via pip. 
 
 ### Experiments
-After setting up the virtual environment for `Experiments/requirements.txt`, you can run the *experiments* by running `Experiments/run_eval.py` using Python, i.e., in `Experiments` after activating the virtual environment run *python run_eval.py*. The paths to the event logs, the event logs to consider, and were to write the result, as well as parameters for the experiments can be edited in the `Experiments/run_eval.py`.
+After setting up the virtual environment for `Experiments/requirements.txt`, you can run the *experiments* by running `Experiments/run_eval.py` using Python, i.e., in `Experiments` after activating the virtual environment run the command *python run_eval.py*. The paths to the event logs, the event logs to consider, and were to write the result, as well as parameters for the experiments can be edited in the `Experiments/run_eval.py`.
 It will write the resulting experiment data from the runtime experiment `Experiments/Experiment_Scripts/test_performance.py` and `Experiments/Experiment_Scripts/test_memory.py` into the folder `Eval-Runs`. The reference results running the experiments are already present in the folder `Eval-Runs`.
 
 The Experiments compare the implementation of the **Valid Tree Miner** `Experiments/Algos/valid_miner.py` against the implementation of the **FREQT** algorithm `Experiments/Algos/freqt.py` in terms of runtime and memory usage.
