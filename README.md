@@ -10,6 +10,18 @@ Corresponding author: Daniel Schuster ([Mail](mailto:daniel.schuster@fit.fraunho
 
 ### Setup
 * A requierments file for the virtual enviroment used to run the experiment is located in 'Scripts/requierments.txt'
+To run the setup you need to have [Python Version >=3.8.0](https://www.python.org/downloads/release/python-380/) and python virtualenv installed.   
+  1. Setup a clean virtualenv: python -m venv venv
+  2. Install requierments: venv/Scripts/python pip install -r -requierments.txt
+  3. Install cortado-core from github:  venv/Scripts/python pip install https://github.com/fit-daniel-schuster/cortado-core
+  4. Open the enviorment: venv/Scripts/activate.bat 
+ 
+Single line setup: 
+
+python -m venv venv && venv/Scripts/python pip install -r -requierments.txt 
+
+
+
 * A requierments file for the virtual enviorment used to run the plotting Jupyter Notebook is located in 'Plotting/requierments.txt'
 
 ### Experiments
