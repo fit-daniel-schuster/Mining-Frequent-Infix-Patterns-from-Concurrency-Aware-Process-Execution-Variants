@@ -21,7 +21,7 @@ To run the setup you need to have [Python Version >=3.8.0](https://www.python.or
   3. **Activate the virtual environment:** *"./venv/Scripts/activate"*  
 
 * A requirements file for the plotting [Jupyter Notebook](https://jupyter.org/) is located in `Plotting/requirements.txt`. 
-  Setup a [Jupyter](https://jupyter.org/install) or (Jupyter Lab)[https://jupyter.org/install] environment and start it. Open the notebook `Plotting/Plotting.ipynb` and run the first cell to install the packages via pip. 
+  Setup a [Jupyter](https://jupyter.org/install) or [Jupyter Lab](https://jupyter.org/install) environment and start it. Open the notebook `Plotting/Plotting.ipynb` and run the first cell to install the packages via pip. 
 
 ### Experiments
 After setting up the virtual environment for `Experiments/requirements.txt`, you can run the *experiments* by running `Experiments/run_eval.py` using Python, i.e., in `Experiments` after activating the virtual environment run *python run_eval.py*. The paths to the event logs, the event logs to consider, and were to write the result, as well as parameters for the experiments can be edited in the `Experiments/run_eval.py`.
