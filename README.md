@@ -16,7 +16,7 @@ Please download the larger [BPI Challenge 2012](https://data.4tu.nl/articles/dat
 * A requierments file for the virtual enviroment used to run the experiment is located in `Experiments/requirements.txt`
 To run the setup you need to have [Python Version >=3.8.0](https://www.python.org/downloads/release/python-380/) and python virtualenv installed.   
   1. **Setup a clean virtualenv:** *python -m venv venv*
-  2. **Install requierments:** *"./venv/Scripts/pip" install -r -requierments.txt*
+  2. **Install requierments:** *"./venv/Scripts/pip" install -r -requirements.txt*
   3. **Activate the virtual enviorment:** *"./venv/Scripts/activate"*  
 
 * A requierments file for the plotting [Jupyter Notebook](https://jupyter.org/) is located in `Plotting/requirements.txt`
