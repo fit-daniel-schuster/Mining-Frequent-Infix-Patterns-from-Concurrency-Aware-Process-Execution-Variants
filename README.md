@@ -1,6 +1,6 @@
 
 Corresponding author: Michael Martini ([Mail](mailto:michael.martini1@rwth-aachen.de?subject=github-infix-mining))
-Corresponding author: Daniel Schuster ([Mail](mailto:daniel.schuster@fit.fraunhofer.de?subject=github-infix-mining))
+and Daniel Schuster ([Mail](mailto:daniel.schuster@fit.fraunhofer.de?subject=github-infix-mining))
 
 
 ### Repository Structure
