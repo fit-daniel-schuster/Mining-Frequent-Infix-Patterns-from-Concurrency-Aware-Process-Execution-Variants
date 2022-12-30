@@ -1,5 +1,16 @@
 
+.idea
+debug.log
+./.idea
+__pycache__
+.vscode/
+*.xes
+.venv
+outputs/
+pm4py/
+.pytest_cache
 Experiments/.venv/**
 Experiments/venv/**
 Experiments/Datasets/BPI_Challenge_2012.xes
 Experiments/Datasets/BPI Challenge 2017.xes
+__pycache__

@@ -1,24 +1,29 @@
 import pandas as pd
 import timeit
-from cortado_core.experiments.subpattern_eval.Algos.asai_performance import (
-    min_sub_mining_asai,
+from Algos.freqt import (
+    min_sub_mining_freqt,
 )
 
-from cortado_core.experiments.subpattern_eval.Algos.valid_performance import min_sub_mining_performance
-from cortado_core.experiments.subpattern_eval.exit_after import run_mining_eval
+from Algos.valid import min_sub_mining_performance
+from Experiment_Scripts.exit_after import run_mining_eval
 
 from cortado_core.subprocess_discovery.subtree_mining.maximal_connected_components.maximal_connected_check import (
     check_if_valid_tree,
     set_maximaly_closed_patterns,
 )
-from cortado_core.subprocess_discovery.subtree_mining.obj import FrequencyCountingStrategy
+from cortado_core.subprocess_discovery.subtree_mining.obj import (
+    FrequencyCountingStrategy,
+)
 from cortado_core.subprocess_discovery.subtree_mining.treebank import (
     create_treebank_from_cv_variants,
 )
 from cortado_core.utils.cvariants import get_concurrency_variants
 from pm4py.objects.log.importer.xes.importer import apply as xes_import
 
-def compare_all(log, log_name, strategy, strategy_name, timeout, artStart):
+
+def compare_performance(
+    log, log_name, strategy, strategy_name, output_path, timeout, artStart
+):
 
     print("Loading Log...")
     start_time = timeit.default_timer()
@@ -66,11 +71,11 @@ def compare_all(log, log_name, strategy, strategy_name, timeout, artStart):
         reps = 2
 
         print()
-        print("Current Sup Level:", rel_sup, "K_max:", k)
+        print("Current Sup Level:", rel_sup)
         print("Abs Sup", abs_sup)
         print()
 
-        df_dict["k_max"] = k
+        df_dict["k_max"] = 100
         df_dict["rel_sup"] = rel_sup
         df_dict["abs_sup"] = abs_sup
         df_dict["tTraces"] = tTraces
@@ -88,12 +93,12 @@ def compare_all(log, log_name, strategy, strategy_name, timeout, artStart):
                     "treebank": treeBank,
                     "k_it": 100,
                     "min_sup": abs_sup,
-                    "bfs_traversal" : True 
+                    "bfs_traversal": True,
                 },
                 "Valid (BFS)",
             ),
             (
-                min_sub_mining_asai,
+                min_sub_mining_freqt,
                 {
                     "frequency_counting_strat": strategy,
                     "treebank": treeBank,
@@ -104,7 +109,7 @@ def compare_all(log, log_name, strategy, strategy_name, timeout, artStart):
                 "NoPruning",
             ),
             (
-                min_sub_mining_asai,
+                min_sub_mining_freqt,
                 {
                     "frequency_counting_strat": strategy,
                     "treebank": treeBank,
@@ -112,7 +117,7 @@ def compare_all(log, log_name, strategy, strategy_name, timeout, artStart):
                     "min_sup": abs_sup,
                     "no_pruning": False,
                 },
-                "Asai",
+                "freqt",
             ),
         ]
 
@@ -191,9 +196,10 @@ def compare_all(log, log_name, strategy, strategy_name, timeout, artStart):
 
         print("Writing Results to File ... ")
         pd.DataFrame.from_dict(df_dicts).to_csv(
-            ".\\cortado_core\\experiments\\subpattern_eval\\Eval_Res\\"
+            output_path
             + log_name
             + "_"
             + strategy_name
             + "_Pattern_Mining_Performance.csv"
         )
+

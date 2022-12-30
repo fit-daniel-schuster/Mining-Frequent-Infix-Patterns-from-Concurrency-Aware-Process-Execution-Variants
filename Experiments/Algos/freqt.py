@@ -5,6 +5,8 @@ from cortado_core.subprocess_discovery.concurrency_trees.cTrees import (
     cTreeOperator,
 )
 
+from cortado_core.subprocess_discovery.subtree_mining.treebank import TreeBankEntry
+
 from cortado_core.subprocess_discovery.subtree_mining.obj import (
     FrequencyCountingStrategy
 )
@@ -54,7 +56,7 @@ def count_activites_in_tree(tree: ConcurrencyTree):
     return seq, act, con
 
 
-def compute_frequent_activity_sets_asai(treebank, freq_strat, min_sup):
+def compute_frequent_activity_sets_freqt(treebank, freq_strat, min_sup):
     
     df_counter = Counter()
     con_counter = Counter()
@@ -94,7 +96,7 @@ def compute_frequent_activity_sets_asai(treebank, freq_strat, min_sup):
     return frequent_act, frequent_df, frequent_cc
 
 
-def min_sub_mining_asai(
+def min_sub_mining_freqt(
     treebank,
     frequency_counting_strat: FrequencyCountingStrategy,
     k_it,
@@ -115,7 +117,7 @@ def min_sub_mining_asai(
     else:
         freq_sup = min_sup
 
-    aActivities, dfActivites, ccActivites = compute_frequent_activity_sets_asai(
+    aActivities, dfActivites, ccActivites = compute_frequent_activity_sets_freqt(
         treebank, frequency_counting_strat, freq_sup
     )
 
@@ -123,7 +125,7 @@ def min_sub_mining_asai(
         ccActivites = aActivities
         dfActivites = aActivities
 
-    F = generate_initial_candidates_asai(
+    F = generate_initial_candidates_freqt(
         treebank,
         min_sup,
         frequency_counting_strat,
@@ -173,7 +175,7 @@ def min_sub_mining_asai(
     return k_pattern, nCandidatesGenerated
 
 
-def min_sub_mining_asai_memory(
+def min_sub_mining_freqt_memory(
     treebank,
     frequency_counting_strat: FrequencyCountingStrategy,
     k_it,
@@ -189,7 +191,7 @@ def min_sub_mining_asai_memory(
     else:
         freq_sup = min_sup
 
-    aActivities, dfActivites, ccActivites = compute_frequent_activity_sets_asai(
+    aActivities, dfActivites, ccActivites = compute_frequent_activity_sets_freqt(
         treebank, frequency_counting_strat, freq_sup
     )
 
@@ -197,7 +199,7 @@ def min_sub_mining_asai_memory(
         ccActivites = aActivities
         dfActivites = aActivities
 
-    F = generate_initial_candidates_asai(
+    F = generate_initial_candidates_freqt(
         treebank,
         min_sup,
         frequency_counting_strat,
@@ -261,7 +263,7 @@ def right_most_path_extension(
 
         if currentNode.op:
             extended_motifes.extend(
-                extend_node_asai(
+                extend_node_freqt(
                     tp,
                     currentNode,
                     extensionOffset,
@@ -278,7 +280,7 @@ def right_most_path_extension(
     return extended_motifes
 
 
-def generate_initial_candidates_asai(
+def generate_initial_candidates_freqt(
     treebank: Mapping[int, TreeBankEntry],
     min_sup: int,
     frequency_counting_strat: FrequencyCountingStrategy,
@@ -398,7 +400,7 @@ def generate_initial_candidates_asai(
     return F2
 
 
-def extend_node_asai(
+def extend_node_freqt(
     tp: TreePattern,
     eNode: ConcurrencyTree,
     eOffset: int,

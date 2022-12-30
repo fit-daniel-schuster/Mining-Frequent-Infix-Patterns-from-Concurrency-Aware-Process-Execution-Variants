@@ -6,10 +6,6 @@ import timeit
 import gc 
 import _thread
     
-    
-    
-# https://gist.github.com/aaronchall/6331661fe0185c30a0b4
-    
 def quit_function():
     
     sys.stderr.flush() 
