@@ -29,4 +29,4 @@ It will write the resulting experiment data from the runtime experiment `Experim
 The Experiments compare the implementation of the Valid Tree Miner `Experiments/Algos/valid_miner.py` against the implementation of the Freqt algorithm `Experiments/Algos/asai.py`
 
 ### Further Results
-Plots on Runtime and Memory evaluation for the four considered real-world event logs (Sepsis, BPI 2012, BPI 2017, BPI 2020) are provided in the folder `Plotting/Figures`. 
+Plots on Runtime and Memory evaluation for the four considered real-world event logs (Sepsis, BPI 2012, BPI 2017, BPI 2020) and differnt support counting strategies are provided in the folder `Plotting/Figures`. 
