@@ -9,8 +9,8 @@ Corresponding author: Daniel Schuster ([Mail](mailto:daniel.schuster@fit.fraunho
 * In `Scripts/run_eval.py` is a script to run the conducted experiments.
 
 ### Event Logs
-To run the experiments real-world event logs in .XES format are needed. We provide the Sepsis Cases and BPI 2020 (Prepaid_Travel_Cost) Event logs. 
-Please download the larger [BPI Challenge 2012](https://data.4tu.nl/articles/dataset/BPI_Challenge_2012/12689204) and [BPI Challenge 2017](https://data.4tu.nl/articles/dataset/BPI_Challenge_2017/12696884) Event log seperatly and add them to the directory. 
+To run the experiments real-world event logs in .XES format are needed. We provide the *Sepsis Cases* and *BPI 2020 (Prepaid_Travel_Cost)* event logs in this repository in the folder `Experiments/Datasets`. 
+Please download the larger [BPI Challenge 2012](https://data.4tu.nl/articles/dataset/BPI_Challenge_2012/12689204) and [BPI Challenge 2017](https://data.4tu.nl/articles/dataset/BPI_Challenge_2017/12696884) event log seperatly and add them to the directory `Experiments/Datasets`, if you want to run the experiment with them. 
 
 ### Setup
 * A requierments file for the virtual enviroment used to run the experiment is located in `Experiments/requirements.txt`
