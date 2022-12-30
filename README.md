@@ -5,7 +5,7 @@ and Daniel Schuster ([Mail](mailto:daniel.schuster@fit.fraunhofer.de?subject=git
 
 ### Repository Structure
 * The proposed Valid Tree Miner algorithms and the baseline Freqt algorithm are implemented in 
-`Scripts/Algos/asai_performance.py` and `Scripts/Algos/valid_performance.py` using the code from the [cortado-core](https://github.com/fit-daniel-schuster/cortado-core) implementation used in [Cortado](https://cortado.fit.fraunhofer.de/). In `Scripts/run_eval.py` is a script to run the conducted experiments on Runtime and Memory Usage. 
+`Scripts/Algos/freqt.py` and `Scripts/Algos/valid.py` using the code from the [cortado-core](https://github.com/fit-daniel-schuster/cortado-core) implementation used in [Cortado](https://cortado.fit.fraunhofer.de/). In `Scripts/run_eval.py` is a script to run the conducted experiments on Runtime and Memory Usage. 
 * Result in form of .CSV files are written into the folder `Eval-Runs`. 
 * The folder `Plotting` contains a Jupyter Notebook used for the creating of the plots in `Plotting/Figures` based on the results in `Eval-Runs`.
 
