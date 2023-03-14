@@ -6,6 +6,7 @@ __pycache__
 .vscode/
 *.xes
 .venv
+venv
 outputs/
 pm4py/
 .pytest_cache
